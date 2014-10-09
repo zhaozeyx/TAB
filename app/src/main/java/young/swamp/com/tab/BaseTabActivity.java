@@ -54,6 +54,9 @@ public abstract class BaseTabActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        if (null == findViewById(R.id.tabContentContainer)) {
+            throw new RuntimeException("用于展示内容的视图必须定义名称为 tabContentContainer");
+        }
         initTabHost();
         setTabContent();
     }
@@ -246,7 +249,7 @@ public abstract class BaseTabActivity extends FragmentActivity {
         mTabHost = (TabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup();
 
-        mTabManager = new TabManager(this, mTabHost, R.id.tabCotentContainer);
+        mTabManager = new TabManager(this, mTabHost, R.id.tabContentContainer);
     }
 
     @SuppressLint("InflateParams")
