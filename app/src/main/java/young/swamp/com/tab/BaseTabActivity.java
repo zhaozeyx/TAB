@@ -12,6 +12,9 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 
+/**
+ * 基于fragment实现的TAB的基类
+ */
 public abstract class BaseTabActivity extends FragmentActivity {
 
 
