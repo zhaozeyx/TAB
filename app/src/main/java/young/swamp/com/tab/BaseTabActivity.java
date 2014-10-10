@@ -58,7 +58,7 @@ public abstract class BaseTabActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         if (null == findViewById(R.id.tabContentContainer)) {
-            throw new RuntimeException("用于展示内容的视图必须定义名称为 tabContentContainer");
+            throw new RuntimeException("a view to show content must be defined with id tabContentContainer");
         }
         initTabHost();
         setTabContent();
