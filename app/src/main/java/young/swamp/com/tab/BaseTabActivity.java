@@ -267,7 +267,7 @@ public abstract class BaseTabActivity extends FragmentActivity {
         /**
          * 图标方向 右
          */
-        private static final int DRAWABLE_RIHT = 0x03;
+        private static final int DRAWABLE_RIGHT = 0x03;
 
         /**
          * 图标方向 下
@@ -343,7 +343,7 @@ public abstract class BaseTabActivity extends FragmentActivity {
                                 0,
                                 0);
                         break;
-                    case DRAWABLE_RIHT:
+                    case DRAWABLE_RIGHT:
                         mTitleView.setCompoundDrawablesWithIntrinsicBounds(0,
                                 0,
                                 mDrawableId,
