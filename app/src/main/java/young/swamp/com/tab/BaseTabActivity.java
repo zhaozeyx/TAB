@@ -13,13 +13,13 @@ import android.widget.TextView;
 
 
 /**
- * 基于fragment实现的TAB的基类
+ * The class used to show tab with fragments
  */
 public abstract class BaseTabActivity extends FragmentActivity {
 
 
     /**
-     * TAG 前缀
+     * TAG prefix
      */
     private static final String TAGS_PREFIX = "main_tab_";
 
@@ -32,10 +32,13 @@ public abstract class BaseTabActivity extends FragmentActivity {
     private TabHost mTabHost;
 
     /**
-     * Tab管理类，用来添加fragment到每个tab中
+     * manage fragment, to show,add fragment to tab
      */
     private TabManager mTabManager;
 
+    /**
+     * an array of tab indicator
+     */
     private TabIndicatorView[] mIndicatorViews;
 
     /**
@@ -44,7 +47,7 @@ public abstract class BaseTabActivity extends FragmentActivity {
     private String[] mTabIds;
 
     /**
-     * 当前可见的fragment
+     * current fragment
      */
     private Fragment mCurrentVisibleFragment;
 
@@ -62,20 +65,18 @@ public abstract class BaseTabActivity extends FragmentActivity {
     }
 
     private void setTabContent() {
-        // 获得需要展示的数据内容
+
         mContentClazzes = getContentClazzes();
 
-        // widget 标题
         String[] titles = getTabTitles();
 
-        // widget 图标
         int[] icons = getTabIcons();
 
         if (null != titles && mContentClazzes.length != titles.length) {
-            throw new RuntimeException("标题数目与展示的标签数目不同");
+            throw new RuntimeException("the count of contents must equal with the count of titles");
         }
         if (null != icons && mContentClazzes.length != icons.length) {
-            throw new RuntimeException("标题数目与展示的标签图标数目不同");
+            throw new RuntimeException("the count of contents must equal with the count of icons");
         }
 
         mIndicatorViews = new TabIndicatorView[mContentClazzes.length];
@@ -103,63 +104,63 @@ public abstract class BaseTabActivity extends FragmentActivity {
             }
         });
 
-        // 设置默认的显示页面
+        // set default content
         mTabManager.onTabChanged(mTabIds[0]);
     }
 
     /**
-     * 布局界面<BR>
+     * the tab layout id<BR>
      *
-     * @return 布局ID
+     * @return layout id
      */
     protected abstract int getLayoutId();
 
     /**
-     * 页签内容<BR>
+     * content class<BR>
      *
-     * @return 显示页签内容的fragments
+     * @return the fragments to show
      */
     @SuppressWarnings("rawtypes")
     protected abstract Class[] getContentClazzes();
 
     /**
-     * 页签指示器标题<BR>
+     * the title of tab indicator<BR>
      *
-     * @return 指示器标题
+     * @return the title of tab indicator
      */
     protected abstract String[] getTabTitles();
 
     /**
-     * 页签指示器图标<BR>
+     * the icon of tab indicator<BR>
      *
-     * @return 指示器图标
+     * @return the icon of tab indicator
      */
     protected int[] getTabIcons() {
         return null;
     }
 
     /**
-     * 图标相对文字的方向<BR>
+     * the position icon relative title<BR>
      *
-     * @return 图标相对文字的方向
+     * @return the position icon relative title
      */
     protected int getTabIconDirection() {
         return TabIndicatorView.DRAWABLE_TOP;
     }
 
     /**
-     * 获得当前可见fragment<BR>
+     * get current fragment<BR>
      *
-     * @return 当前可见的fragment
+     * @return get current fragment
      */
     protected Fragment getVisibleFragment() {
         return mCurrentVisibleFragment;
     }
 
     /**
-     * 根据id获取fragment<BR>
+     * get fragment by id<BR>
      *
-     * @param tag fragment的ID
+     * @param tag fragment ID
      * @return fragment
      */
     protected Fragment getTabById(String tag) {
@@ -167,9 +168,9 @@ public abstract class BaseTabActivity extends FragmentActivity {
     }
 
     /**
-     * 根据索引获取fragment<BR>
+     * get fragment by index<BR>
      *
-     * @param index 索引
+     * @param index the index of tab
      * @return fragment
      */
     protected Fragment getTabByIndex(int index) {
@@ -177,7 +178,7 @@ public abstract class BaseTabActivity extends FragmentActivity {
     }
 
     /**
-     * 设置页签切换的事件监听<BR>
+     * set listener <BR>
      *
      * @param listener
      */
@@ -186,7 +187,7 @@ public abstract class BaseTabActivity extends FragmentActivity {
     }
 
     /**
-     * 切换显示的tab<BR>
+     * switch tab<BR>
      *
      * @param index 显示的tab索引
      */
@@ -195,16 +196,16 @@ public abstract class BaseTabActivity extends FragmentActivity {
     }
 
     /**
-     * 当页签切换<BR>
+     * on tab changed<BR>
      *
-     * @param tabId 页签ID
+     * @param tabId tab id
      */
     protected void onTabChanged(String tabId) {
         mTabManager.onTabChanged(tabId);
     }
 
     /**
-     * 根据索引获得页签ID<BR>
+     * get tab id by index<BR>
      *
      * @param index 索引
      * @return 页签
@@ -217,20 +218,20 @@ public abstract class BaseTabActivity extends FragmentActivity {
     }
 
     /**
-     * 设置指示器数字<BR>
+     * set indicator count (such as unread message)<BR>
      *
-     * @param index 指示器索引
-     * @param count 个数
+     * @param index the index of tab
+     * @param count the count to be set
      */
     protected void setIndicatorCount(int index, int count) {
         mIndicatorViews[index].setUnreadCount(count);
     }
 
     /**
-     * 获得指示器数字<BR>
+     * get the number of tab indicator<BR>
      *
-     * @param index 所以
-     * @return 指示器数字
+     * @param index the index of tab
+     * @return the count of indicator
      */
     protected int getIndicatorCount(int index) {
         return mIndicatorViews[index].getUnreadCount();
@@ -255,52 +256,52 @@ public abstract class BaseTabActivity extends FragmentActivity {
     @SuppressLint("InflateParams")
     public class TabIndicatorView extends RelativeLayout {
         /**
-         * 图标方向 左
+         * icon direction left
          */
         private static final int DRAWABLE_LEFT = 0x01;
 
         /**
-         * 图标方向 上
+         * icon direction top
          */
         private static final int DRAWABLE_TOP = 0x02;
 
         /**
-         * 图标方向 右
+         * icon direction right
          */
         private static final int DRAWABLE_RIGHT = 0x03;
 
         /**
-         * 图标方向 下
+         * icond direction bottom
          */
         private static final int DRAWABLE_BOTTOM = 0x04;
 
         /**
-         * 标题字符串
+         * title
          */
         private String mTabTitleStr;
 
         /**
-         * 标题视图
+         * the view shows title
          */
         private TextView mTitleView;
 
         /**
-         * 计数视图
+         * the view shows the number of new message
          */
         private TextView mCountView;
 
         /**
-         * 计数
+         * the number of new message
          */
         private int mCount;
 
         /**
-         * 标志资源ID
+         * icon id
          */
         private int mDrawableId;
 
         /**
-         * 标志方向
+         * icon direction
          */
         private int mDrawableDirection;
 
@@ -381,7 +382,7 @@ public abstract class BaseTabActivity extends FragmentActivity {
     }
 
     /**
-     * tab切换监听<BR>
+     * the listener invoked when switch tab<BR>
      */
     public interface OnTabChangedListener {
         void onTabChanged(String tabId);
