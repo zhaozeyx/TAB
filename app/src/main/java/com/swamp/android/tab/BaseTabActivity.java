@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import young.swamp.com.tab.R;
+import com.swamp.android.R;
 
 
 /**
