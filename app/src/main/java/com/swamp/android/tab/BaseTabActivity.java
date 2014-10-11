@@ -1,4 +1,4 @@
-package young.swamp.com.tab;
+package com.swamp.android.tab;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import young.swamp.com.tab.R;
 
 
 /**
